@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago | Ellado Dulce</title>
+
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="pago.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="imagenes/logo2019.png" class="logo-img" alt="Logo Ellado Dulce">
+        <span>Ellado <strong>Dulce</strong></span>
+    </div>
+
+    <nav class="menu">
+        <a href="index.html">Inicio</a>
+
+        <div class="dropdown">
+            <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
+            <div class="dropdown-menu">
+                <a href="boquitas-dulces.html">Boquitas Dulces</a>
+                <a href="boquitas-saladas.html">Boquitas Saladas</a>
+            </div>
+        </div>
+
+        <a href="Pasteles.html">Pasteles</a>
+        <a href="reservas.html">Reservas</a>
+        <a href="actividades.html">Actividades</a>
+        <a href="Nosotros.html">Nosotros</a>
+        <a href="mi-cuenta.html">Mi cuenta</a>
+    </nav>
+
+    <div class="cart">
+        <a href="pantalla-de-carrito.html">
+            <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+        </a>
+    </div>
+</header>
+
+<main class="payment-page">
+
+    <h1>Procesar <span>pago</span></h1>
+
+    <section class="payment-grid">
+
+        <form id="pagoForm" class="payment-card">
+
+            <h2>Pago con tarjeta</h2>
+
+            <p class="payment-note">
+                Pago de demostración. Usa una tarjeta ficticia; no se realizan cobros ni se guardan los datos de tarjeta.
+            </p>
+
+            <div class="form-group">
+                <label for="nombreTarjeta">Nombre en la tarjeta</label>
+                <input type="text" id="nombreTarjeta" placeholder="Ej: Benjamin Romero" required>
+            </div>
+
+            <div class="form-group">
+                <label for="numeroTarjeta">Número de tarjeta</label>
+                <input type="text" id="numeroTarjeta" placeholder="1234 5678 9012 3456" maxlength="19" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fechaTarjeta">Fecha</label>
+                    <input type="text" id="fechaTarjeta" placeholder="MM/AA" maxlength="5" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" placeholder="123" maxlength="4" required>
+                </div>
+            </div>
+
+            <button type="submit" class="pay-btn">
+                Confirmar pago simulado
+            </button>
+
+            <a href="pantalla-de-carrito.html" class="back-cart">
+                Volver
+            </a>
+
+        </form>
+
+        <aside class="summary-card">
+
+            <h2>Resumen de la compra</h2>
+
+            <div class="summary-products"></div>
+
+            <div class="summary-line">
+                <span>Subtotal</span>
+                <strong><span id="pago-subtotal">B/.0.00</span></strong>
+            </div>
+
+            <div class="summary-line">
+                <span>ITBMS (7%)</span>
+                <strong><span id="pago-itbms">B/.0.00</span></strong>
+            </div>
+
+            <div class="summary-line" id="pago-descuento-line" hidden><span>Descuento por puntos</span><strong id="pago-descuento"></strong></div>
+            <div class="summary-divider"></div>
+
+            <div class="summary-line total-line">
+                <span>Total</span>
+                <strong><span id="pago-total">B/.0.00</span></strong>
+            </div>
+
+        </aside>
+
+    </section>
+
+</main>
+
+
+
+<noscript><p class="demo-note">Activa JavaScript para usar el catálogo, tu cuenta y el carrito.</p></noscript>
+<script src="datos.js"></script>
+<script src="app.js"></script>
+<script src="paginas.js"></script>
+
+</body>
+</html>

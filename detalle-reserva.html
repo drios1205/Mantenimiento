@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{nombre}} | Ellado Dulce</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="detalle.reserva.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="logo-img">
+        <span>Ellado <strong>Dulce</strong></span>
+    </div>
+
+    <nav class="menu">
+            <a href="index.html">Inicio</a>
+
+            <div class="dropdown">
+                <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
+                <div class="dropdown-menu">
+                    <a href="boquitas-dulces.html">Boquitas Dulces</a>
+                    <a href="boquitas-saladas.html">Boquitas Saladas</a>
+                </div>
+            </div>
+
+            <a href="Pasteles.html">Pasteles</a>
+            <a href="reservas.html">Reservas</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="Nosotros.html">Nosotros</a>
+            <a href="mi-cuenta.html">Mi cuenta</a>
+        </nav>
+
+    <div class="cart">
+        <a href="pantalla-de-carrito.html">
+            <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+        </a>
+    </div>
+</header>
+
+<main class="reserva-page">
+
+    <a href="reservas.html" class="back-link">← Volver a Reservas</a>
+
+    <section class="reserva-layout">
+
+        <div class="left-area">
+
+            <div class="product-image">
+                <img src="imagenes/logo2019.png" data-image="{{imagen}}" alt="{{nombre}}">
+            </div>
+
+            <section class="form-card">
+                <h2>Completa tu reserva</h2>
+
+                <form id="reservaDetalleForm">
+
+                    <input type="hidden" name="tipoPago" value="reserva">    
+                    <input type="hidden" name="idTipoReserva" value="{{id}}">
+                    <input type="hidden" name="nombreTipo" value="{{nombre}}">
+                    <input type="hidden" name="precioBase" value="{{precioTexto}}">
+                    <input type="hidden" name="horasBase" value="{{horas}}">
+
+                    <div class="form-group">
+                        <label for="nombrePrincipal">{{campoPrincipal}}</label>
+                        <input 
+                            type="text" 
+                            id="nombrePrincipal" 
+                            name="nombrePrincipal"
+                            placeholder="{{ejemploPrincipal}}"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="decoracionDescripcion">{{campoDecoracion}}</label>
+                        <textarea 
+                            id="decoracionDescripcion" 
+                            name="decoracionDescripcion"
+                            placeholder="{{ejemploDecoracion}}"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fechaReserva">Fecha</label>
+                            <input type="date" id="fechaReserva" name="fechaReserva" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="horaReserva">Hora</label>
+                            <input type="time" id="horaReserva" name="horaReserva" required>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+        </div>
+
+        <aside class="package-card">
+            <h1>{{nombre}}</h1>
+
+            <div class="price">
+                <strong>B/.{{precioTexto}}</strong>
+                <span>/ {{horas}} horas</span>
+            </div>
+
+            <p class="description">
+                {{descripcion}}
+            </p>
+
+            <h3>Este paquete incluye:</h3>
+
+            <ul class="include-list"></ul>
+
+            <button type="button" class="buy-btn" id="btnComprarReserva">
+             Comprar
+            </button>
+
+            <a href="#" target="_blank" class="whatsapp-btn" id="whatsappReserva">
+                Consultar por WhatsApp
+            </a>
+        </aside>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-col">
+        <div class="footer-logo">
+            <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="footer-logo-img">
+            <h3>Ellado <span>Dulce</span></h3>
+        </div>
+        <p>Tu lugar favorito para endulzar cada momento.</p>
+    </div>
+
+    <div class="footer-col">
+        <h3>Horarios</h3>
+        <p>Lunes<br>1:00 p.m. - 8:00 p.m.</p>
+        <p>Martes a Domingos<br>1:00 p.m. - 9:00 p.m.</p>
+    </div>
+
+    <div class="footer-col">
+        <h3>Ubicación</h3>
+        <p>Brisas Mall, Av. Principal, San Miguelito, Provincia de Panamá.</p>
+        <a href="#">Cómo llegar →</a>
+    </div>
+
+    <div class="footer-col">
+        <h3>Contacto</h3>
+        <p>@elladodulce</p>
+        <p>+507 315-8752</p>
+    </div>
+
+    <div class="copyright">
+        © 2025 Ellado Dulce. Todos los derechos reservados.
+    </div>
+</footer>
+
+
+
+
+
+<noscript><p class="demo-note">Activa JavaScript para usar el catálogo, tu cuenta y el carrito.</p></noscript>
+<script src="datos.js"></script>
+<script src="app.js"></script>
+<script src="paginas.js"></script>
+<script src="detalle-reserva.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+[hidden] { display: none !important; }
+.app-message, .demo-note { padding: 12px 18px; border-radius: 12px; background: #fff0f5; color: #582a40; line-height: 1.6; }
+.demo-note { max-width: 1120px; margin: 16px auto; font-size: 14px; }
+.app-error { background: #fff0ed; color: #9a291b; }
+.app-message:empty { display: none; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+.local-admin-link { display: block; margin-top: 16px; color: #b72a5a; }
+.cart-count { margin-left: 5px; color: #b72a5a; font-weight: 700; }

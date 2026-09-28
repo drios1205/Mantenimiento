@@ -1,0 +1,399 @@
+/* =========================
+   CONTENEDORES GENERALES
+========================= */
+
+.container,
+.hero-inner,
+.reserve-section,
+.points-section {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+.section {
+    padding: 56px 45px 26px;
+}
+
+.section h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #101942;
+    margin-bottom: 24px;
+}
+
+.section h2 span {
+    color: #ff4f8b;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background-color: #171b4f;
+    color: #ffffff;
+    padding: 64px 45px 78px;
+}
+
+.hero-content {
+    max-width: 620px;
+}
+
+.hero h1 {
+    font-size: 56px;
+    line-height: 1.1;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.hero h1 span {
+    color: #ff4f8b;
+}
+
+.hero p {
+    max-width: 560px;
+    color: #d9d9ec;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* =========================
+   PRODUCTOS DESTACADOS
+========================= */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 8px 20px rgba(16, 25, 66, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-img {
+    width: 100%;
+    height: 122px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 14px;
+    background-color: #e5e5e5;
+}
+
+.product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-card h3 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #171b4f;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.price {
+    color: #ff4f8b;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.small-btn {
+    margin-top: auto;
+    align-self: flex-end;
+    border: none;
+    background-color: #ff4f8b;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.small-btn:hover {
+    background-color: #f63878;
+}
+
+/* =========================
+   RESERVA
+========================= */
+
+.reserve-band {
+    margin: 54px 0 0;
+    background-color: #171b4f;
+    color: #ffffff;
+}
+
+.reserve-section {
+    padding: 42px 45px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 34px;
+}
+
+.reserve-info h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.reserve-info h2 span {
+    color: #ff4f8b;
+}
+
+.reserve-info p {
+    max-width: 560px;
+    color: #d9d9ec;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 11px 22px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #ff4f8b;
+    color: #ffffff;
+    border: 1px solid #ff4f8b;
+}
+
+.btn-primary:hover {
+    background-color: #f63878;
+}
+
+.reserve-prices {
+    display: flex;
+    gap: 16px;
+}
+
+.price-box {
+    width: 122px;
+    min-height: 112px;
+    border-radius: 16px;
+    background-color: #ff4f8b;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+    padding: 12px;
+}
+
+.price-box span {
+    font-size: 11px;
+}
+
+.price-box strong {
+    font-size: 26px;
+    font-weight: 800;
+}
+
+.price-box small {
+    font-size: 11px;
+}
+
+.dark-box {
+    background-color: #2d315f;
+}
+
+/* =========================
+   NOTICIAS
+========================= */
+
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.activity-card {
+    border-radius: 18px;
+    padding: 24px;
+    min-height: 260px;
+}
+
+.activity-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.activity-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.activity-card h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #171b4f;
+    margin-bottom: 10px;
+}
+
+.activity-card p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #625f7d;
+    margin-bottom: 16px;
+}
+
+.activity-card a {
+    display: inline-block;
+    background-color: #171b4f;
+    color: #ffffff;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.activity-card a:hover {
+    background-color: #ff4f8b;
+}
+
+.pink {
+    background-color: #fde8f2;
+}
+
+.purple {
+    background-color: #eee4ff;
+}
+
+.yellow {
+    background-color: #fff7bd;
+}
+
+/* =========================
+   SISTEMA DE PUNTOS
+========================= */
+
+.points-wrapper {
+    padding: 0 45px 52px;
+}
+
+.points-section {
+    background: linear-gradient(135deg, #171b4f, #32175c);
+    color: #ffffff;
+    border-radius: 22px;
+    padding: 34px 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 38px;
+    align-items: center;
+}
+
+.points-section h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.points-section p {
+    color: #d9d9ec;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 620px;
+}
+
+.points-steps {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    text-align: center;
+}
+
+.point-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.point-step img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.point-step p {
+    font-size: 12px;
+    color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 600px) {
+    .product-grid,
+    .activity-grid,
+    .footer {
+        grid-template-columns: 1fr;
+    }
+
+    .reserve-prices,
+    .hero-buttons,
+    .points-steps {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .points-section {
+        padding: 28px 24px;
+    }
+}
+
+/* AJUSTE DE ESPACIADO PARA NOTICIAS */
+
+.news-section {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+.news-section h2 {
+    margin-bottom: 24px;
+}
+
+.news-section .activity-grid {
+    margin-bottom: 0;
+}
+
+.points-wrapper {
+    padding: 0 45px 52px;
+}

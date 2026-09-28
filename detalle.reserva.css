@@ -1,0 +1,291 @@
+/* =========================
+   PÁGINA DE RESERVA
+========================= */
+
+.reserva-page {
+    padding: 38px 32px 70px;
+}
+
+.back-link {
+    max-width: 1180px;
+    margin: 0 auto 24px;
+    display: block;
+    color: #7a7890;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.back-link:hover {
+    color: #ff4f8b;
+}
+
+.reserva-layout {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.25fr 0.85fr;
+    gap: 34px;
+    align-items: start;
+}
+
+.left-area {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* =========================
+   IMAGEN
+========================= */
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    border-radius: 22px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 12px 30px rgba(16, 25, 66, 0.08);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-card {
+    background-color: #ffffff;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 12px 30px rgba(16, 25, 66, 0.08);
+}
+
+.form-card h2 {
+    font-size: 24px;
+    color: #101942;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #101942;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: 1px solid #eadce6;
+    border-radius: 16px;
+    padding: 15px 17px;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 14px;
+    color: #101942;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.form-group textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #ff4f8b;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* =========================
+   BOTÓN CONTINUAR
+========================= */
+
+.continue-btn {
+    width: 100%;
+    border: none;
+    border-radius: 999px;
+    padding: 15px 22px;
+    background-color: #ff4f8b;
+    color: #ffffff;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(255, 79, 139, 0.24);
+}
+
+.continue-btn:hover {
+    background-color: #f63878;
+}
+
+/* =========================
+   TARJETA DEL PAQUETE
+========================= */
+
+.package-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 34px;
+    box-shadow: 0 14px 34px rgba(16, 25, 66, 0.1);
+    position: sticky;
+    top: 24px;
+}
+
+.package-card h1 {
+    font-size: 34px;
+    line-height: 1.1;
+    color: #101942;
+    margin-bottom: 16px;
+}
+
+.price {
+    margin-bottom: 18px;
+}
+
+.price strong {
+    color: #ff4f8b;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.price span {
+    color: #8b88a3;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.description {
+    color: #625f7d;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 26px;
+}
+
+.package-card h3 {
+    font-size: 16px;
+    color: #101942;
+    margin-bottom: 16px;
+}
+
+/* =========================
+   LISTA INCLUIDA
+========================= */
+
+.include-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.include-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #625f7d;
+    font-size: 14px;
+}
+
+.include-list li span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff4f8b;
+    flex-shrink: 0;
+}
+
+/* =========================
+   BOTONES DE COMPRA
+========================= */
+
+.buy-btn,
+.whatsapp-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 14px 22px;
+    font-size: 14px;
+    font-weight: 800;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.buy-btn {
+    border: none;
+    background-color: #ff4f8b;
+    color: #ffffff;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 22px rgba(255, 79, 139, 0.24);
+}
+
+.buy-btn:hover {
+    background-color: #f63878;
+}
+
+.whatsapp-btn {
+    border: 1px solid #ff4f8b;
+    color: #ff4f8b;
+    background-color: #ffffff;
+}
+
+.whatsapp-btn:hover {
+    background-color: #ff4f8b;
+    color: #ffffff;
+}
+
+/* =========================
+   RESPONSIVE DE RESERVA
+========================= */
+
+@media (max-width: 950px) {
+    .reserva-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .package-card {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    .reserva-page {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 240px;
+    }
+
+    .package-card h1 {
+        font-size: 28px;
+    }
+
+    .price strong {
+        font-size: 28px;
+    }
+}

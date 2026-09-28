@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi cuenta | Ellado Dulce</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="mi-cuenta.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="logo-img">
+        <span>Ellado <strong>Dulce</strong></span>
+    </div>
+
+    <nav class="menu">
+            <a href="index.html">Inicio</a>
+
+            <div class="dropdown">
+                <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
+                <div class="dropdown-menu">
+                    <a href="boquitas-dulces.html">Boquitas Dulces</a>
+                    <a href="boquitas-saladas.html">Boquitas Saladas</a>
+                </div>
+            </div>
+
+            <a href="Pasteles.html">Pasteles</a>
+            <a href="reservas.html">Reservas</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="Nosotros.html">Nosotros</a>
+            <a href="mi-cuenta.html">Mi cuenta</a>
+        </nav>
+
+    <div class="cart">
+        <a href="pantalla-de-carrito.html">
+            <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+        </a>
+    </div>
+</header>
+
+<main class="account-page">
+
+    <section class="account-grid">
+
+        <div class="main-column">
+
+            <section class="welcome-card">
+                <div class="user-info">
+
+                    <div>
+                        <span>Bienvenida de vuelta</span>
+                        <h1>Hola, <strong id="userName">{{nombreCliente}}</strong></h1>
+                        <p>
+                            Aquí puedes ver tus órdenes, reservas y actividades compradas.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="points-box">
+                    <span>PUNTOS</span>
+                    <strong id="totalPoints">{{puntosCliente}}</strong>
+                </div>
+            </section>
+
+            <section class="history-card">
+                <div class="section-header">
+                    <h2>Mi historial</h2>
+
+                    <select id="historySelect" class="history-select">
+                        <option value="actividades">Actividades</option>
+                        <option value="ordenes">Órdenes</option>
+                        <option value="reservas">Reservas</option>
+                    </select>
+                </div>
+
+                <div class="history-section" id="actividadesSection">
+                    <h3>Mis actividades</h3>
+
+                    <div class="history-table">
+                        <div class="table-head">
+                            <span>Actividad</span>
+                            <span>Fecha y hora</span>
+                            <span>Confirmación</span>
+                            <span>Estado</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="history-section hidden" id="ordenesSection">
+                    <h3>Mis órdenes</h3>
+
+                    <div class="history-table">
+                        <div class="table-head">
+                            <span>Producto</span>
+                            <span>Cantidad</span>
+                            <span>Total</span>
+                            <span>Estado</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="history-section hidden" id="reservasSection">
+                    <h3>Mis reservas</h3>
+
+                    <div class="history-table">
+                        <div class="table-head">
+                            <span>Reserva</span>
+                            <span>Fecha y hora</span>
+                            <span>Total</span>
+                            <span>Estado</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+                <div class="info-message">
+                    <span>ⓘ</span>
+                    <p>Usa el menú para cambiar entre tus actividades, órdenes y reservas.</p>
+                </div>
+            </section>
+
+        </div>
+
+        <aside class="side-column">
+
+            <section class="personal-card">
+                <a href="logout.html" class="logout-btn">Cerrar sesión</a>
+                <a href="admin.html" class="local-admin-link">Panel de demostración local</a>
+            </section>
+
+        </aside>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-col">
+        <div class="footer-logo">
+            <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="footer-logo-img">
+            <h3>Ellado <span>Dulce</span></h3>
+        </div>
+        <p>Tu lugar favorito para endulzar cada momento.</p>
+    </div>
+
+    <div class="footer-col">
+        <h3>Horarios</h3>
+        <p>Lunes<br>1:00 p.m. - 8:00 p.m.</p>
+        <p>Martes a Domingos<br>1:00 p.m. - 9:00 p.m.</p>
+    </div>
+
+    <div class="footer-col">
+        <h3>Ubicación</h3>
+        <p>Brisas Mall, Av. Principal, San Miguelito, Provincia de Panamá.</p>
+        <a href="#">Cómo llegar &rarr;</a>
+    </div>
+
+    <div class="footer-col">
+        <h3>Contacto</h3>
+        <p>@elladodulce</p>
+        <p>+507 312-2322</p>
+    </div>
+
+    <div class="copyright">
+        © 2026 Ellado Dulce. Todos los derechos reservados.
+    </div>
+</footer>
+
+
+
+<noscript><p class="demo-note">Activa JavaScript para usar el catálogo, tu cuenta y el carrito.</p></noscript>
+<script src="datos.js"></script>
+<script src="app.js"></script>
+<script src="paginas.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,367 @@
+/* =========================
+   MI CUENTA
+========================= */
+
+.hidden {
+    display: none !important;
+}
+
+.account-page {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 36px 38px 170px;
+    min-height: 620px;
+}
+
+.account-grid {
+    display: grid;
+    grid-template-columns: 1fr 330px;
+    gap: 30px;
+    align-items: start;
+}
+
+.main-column {
+    width: 100%;
+}
+
+.side-column {
+    width: 100%;
+}
+
+/* =========================
+   TARJETA DE BIENVENIDA
+========================= */
+
+.welcome-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 32px 36px;
+    box-shadow: 0 8px 22px rgba(16, 25, 66, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    gap: 24px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.user-info span {
+    color: #b2aec5;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.user-info h1 {
+    color: #171b4f;
+    font-size: 28px;
+    font-weight: 800;
+    margin: 4px 0 6px;
+}
+
+.user-info h1 strong {
+    color: #ff4f8b;
+}
+
+.user-info p {
+    color: #8a86a0;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 430px;
+}
+
+.points-box {
+    width: 108px;
+    min-height: 86px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #ff4f8b, #dc384d);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 8px 18px rgba(255, 79, 139, 0.28);
+    flex-shrink: 0;
+}
+
+.points-box span {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.points-box strong {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* =========================
+   HISTORIAL
+========================= */
+
+.history-card {
+    background-color: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 12px 30px rgba(16, 25, 66, 0.08);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    gap: 18px;
+}
+
+.section-header h2 {
+    color: #171b4f;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.history-select {
+    border: 1px solid #eadce6;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #101942;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.history-select:focus {
+    border-color: #ff4f8b;
+}
+
+.history-section {
+    margin-top: 22px;
+}
+
+.history-section h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #101942;
+}
+
+/* =========================
+   TABLAS DEL HISTORIAL
+========================= */
+
+.history-table {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table-head,
+.table-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1.2fr 0.8fr 0.8fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.table-head {
+    padding: 14px 16px;
+    background-color: #fff1f7;
+    border-radius: 14px;
+    color: #101942;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.table-row {
+    padding: 16px;
+    border-bottom: 1px solid #f0e4ec;
+    color: #625f7d;
+    font-size: 13px;
+}
+
+.table-row span:first-child {
+    color: #171b4f;
+    font-weight: 700;
+}
+
+.empty-message {
+    padding: 18px;
+    color: #7a7890;
+    font-size: 14px;
+    background-color: #faf7fa;
+    border-radius: 14px;
+    margin-top: 12px;
+}
+
+/* =========================
+   MENSAJE INFORMATIVO
+========================= */
+
+.info-message {
+    margin-top: 18px;
+    background-color: #eef6ff;
+    color: #5a9ff5;
+    border-radius: 14px;
+    padding: 13px 18px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info-message span {
+    font-weight: 800;
+}
+
+.info-message p {
+    font-size: 12px;
+}
+
+/* =========================
+   TARJETA LATERAL
+========================= */
+
+.personal-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 8px 22px rgba(16, 25, 66, 0.08);
+}
+
+.logout-btn {
+    display: block;
+    width: 100%;
+    background-color: #171b4f;
+    color: #ffffff !important;
+    text-align: center;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background-color: #ff4f8b;
+    color: #ffffff !important;
+}
+
+/* =========================
+   MENSAJES VACÍOS
+========================= */
+
+.empty-activities,
+.empty-orders {
+    background-color: #fff8fb;
+    border: 1px dashed #ffb6cf;
+    border-radius: 16px;
+    padding: 34px 22px;
+    text-align: center;
+    margin-top: 18px;
+}
+
+.empty-activities strong,
+.empty-orders strong {
+    display: block;
+    color: #171b4f;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.empty-activities p,
+.empty-orders p {
+    color: #8a86a0;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.empty-activities a,
+.empty-orders a {
+    display: inline-block;
+    background-color: #ff4f8b;
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 11px 22px;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.empty-activities a:hover,
+.empty-orders a:hover {
+    background-color: #f63878;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .points-box {
+        width: 120px;
+    }
+}
+
+@media (max-width: 750px) {
+    .account-page {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .welcome-card {
+        padding: 26px 22px;
+    }
+
+    .user-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .history-select {
+        width: 100%;
+    }
+
+    .table-head,
+    .table-row {
+        min-width: 620px;
+    }
+}
+
+@media (max-width: 500px) {
+    .account-page {
+        padding-top: 28px;
+        padding-bottom: 90px;
+    }
+
+    .history-card,
+    .personal-card {
+        padding: 22px;
+    }
+
+    .user-info h1 {
+        font-size: 24px;
+    }
+
+    .points-box strong {
+        font-size: 26px;
+    }
+}

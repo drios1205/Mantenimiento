@@ -1,0 +1,291 @@
+/* =========================
+   HERO NOSOTROS
+========================= */
+
+.hero-about {
+    background: linear-gradient(135deg, #171b4f 0%, #2a2f7a 100%);
+    color: #ffffff;
+    padding: 80px 42px 70px;
+    text-align: center;
+}
+
+.hero-content h1 {
+    font-size: 52px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 17px;
+    color: #d8d8ea;
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* =========================
+   HISTORIA
+========================= */
+
+.history-section {
+    padding: 60px 42px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.history-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.history-text h2 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #101942;
+}
+
+.history-text p {
+    color: #625f7d;
+    line-height: 1.8;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+.history-text p strong {
+    color: #ff4f8b;
+}
+
+.history-image {
+    width: 100%;
+    height: 340px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(16, 25, 66, 0.12);
+    background-color: #ffffff;
+}
+
+.history-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================
+   VALORES
+========================= */
+
+.values-section {
+    background-color: #ffffff;
+    padding: 60px 42px 70px;
+    text-align: center;
+}
+
+.values-section h2 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    color: #101942;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background-color: #f8f2f6;
+    padding: 30px 20px;
+    border-radius: 18px;
+    border: 2px solid transparent;
+}
+
+.value-icon {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.value-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #101942;
+}
+
+.value-card p {
+    color: #625f7d;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* =========================
+   EQUIPO
+========================= */
+
+.team-section {
+    padding: 60px 42px 70px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #101942;
+}
+
+.team-subtitle {
+    color: #625f7d;
+    font-size: 15px;
+    max-width: 620px;
+    margin: 0 auto 44px;
+    line-height: 1.6;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+}
+
+.team-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(16, 25, 66, 0.08);
+    border: 2px solid transparent;
+}
+
+.team-card-image {
+    width: 100%;
+    height: 200px;
+    background-color: #ececec;
+    overflow: hidden;
+}
+
+.team-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.team-card-info {
+    padding: 18px 16px 22px;
+    text-align: center;
+}
+
+.team-card-info h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #101942;
+    margin-bottom: 2px;
+}
+
+.team-card-info .role {
+    color: #ff4f8b;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.team-card-info .team-description {
+    color: #625f7d;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.team-details {
+    border-top: 1px solid #eeeaf0;
+    padding-top: 12px;
+    text-align: left;
+}
+
+.team-details p {
+    font-size: 12px;
+    color: #101942;
+    margin-bottom: 2px;
+    line-height: 1.5;
+}
+
+.team-details p strong {
+    color: #ff4f8b;
+    font-weight: 600;
+    font-size: 11px;
+}
+
+/* =========================
+   RESPONSIVE NOSOTROS
+========================= */
+
+@media (max-width: 1100px) {
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1000px) {
+    .history-container {
+        grid-template-columns: 1fr;
+    }
+
+    .history-image {
+        height: 260px;
+    }
+
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-about,
+    .history-section,
+    .values-section,
+    .team-section {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+    }
+
+    .history-text h2,
+    .values-section h2,
+    .team-section h2 {
+        font-size: 28px;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+    }
+
+    .team-card-image {
+        height: 180px;
+    }
+}

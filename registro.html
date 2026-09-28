@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse | El Lado Dulce</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="registro.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">
+        <img src="imagenes/logo2019.png" class="logo-img" alt="Logo El Lado Dulce">
+        <span>El <strong>Lado Dulce</strong></span>
+    </div>
+
+    <nav class="menu">
+            <a href="index.html">Inicio</a>
+
+            <div class="dropdown">
+                <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
+                <div class="dropdown-menu">
+                    <a href="boquitas-dulces.html">Boquitas Dulces</a>
+                    <a href="boquitas-saladas.html">Boquitas Saladas</a>
+                </div>
+            </div>
+
+            <a href="Pasteles.html">Pasteles</a>
+            <a href="reservas.html">Reservas</a>
+            <a href="actividades.html">Actividades</a>
+            <a href="Nosotros.html">Nosotros</a>
+            <a href="mi-cuenta.html">Mi cuenta</a>
+        </nav>
+
+    <div class="cart">
+        <a href="pantalla-de-carrito.html">
+            <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+        </a>
+    </div>
+</header>
+
+<main class="register-page">
+    <section class="register-card">
+
+        <div class="register-icon">
+            E
+        </div>
+
+        <h1>Crear cuenta</h1>
+        <p class="register-text">
+    Regístrate para ordenar productos, reservar actividades y acumular puntos.
+</p>
+
+
+
+        <p class="demo-note">Cuenta de demostración guardada solo en este navegador. Usa datos de prueba.</p>
+        <form id="registroForm" class="register-form">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <div class="input-box">
+                        <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <div class="input-box">
+                        <input type="text" id="apellido" name="apellido" placeholder="Ingresa tu apellido" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="usuario">Usuario</label>
+                <div class="input-box">
+                    <input type="text" id="usuario" name="usuario" placeholder="Crea tu usuario" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+    <label for="correo">Correo</label>
+    <div class="input-box">
+        <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo electrónico" required>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="telefono">Teléfono</label>
+    <div class="input-box">
+        <input type="text" id="telefono" name="telefono" placeholder="Ingresa tu teléfono" required>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="contrasena">Contraseña</label>
+    <div class="input-box">
+        <input type="password" id="contrasena" name="contrasena" placeholder="Crea una contraseña" required>
+    </div>
+</div>
+
+            <button type="submit" class="register-btn">
+                Registrarse
+            </button>
+
+            <p class="login-link">
+                ¿Ya tienes cuenta?
+                <a href="login.html">Iniciar sesión</a>
+            </p>
+
+        </form>
+
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-col">
+        <div class="footer-logo">
+            <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="footer-logo-img">
+            <h3>El <span>Lado Dulce</span></h3>
+        </div>
+        <p>Tu lugar favorito para endulzar cada momento.</p>
+    </div>
+
+    <div class="footer-col">
+        <h3>Horarios</h3>
+        <p>Lunes<br>10:00 a.m. - 8:00 p.m.</p>
+        <p>Martes a Domingo<br>10:00 a.m. - 9:00 p.m.</p>
+    </div>
+
+    <div class="footer-col">
+        <h3>Ubicación</h3>
+        <p>Brisas Mall, Av. Principal, San Miguelito, Provincia de Panamá.</p>
+        <a href="#">Cómo llegar →</a>
+    </div>
+
+    <div class="footer-col">
+        <h3>Contacto</h3>
+        <p>@elladodulce</p>
+        <p>+507 315-8752</p>
+    </div>
+
+    <div class="copyright">
+        © 2026 El Lado Dulce. Todos los derechos reservados.
+    </div>
+</footer>
+
+<noscript><p class="demo-note">Activa JavaScript para usar el catálogo, tu cuenta y el carrito.</p></noscript>
+<script src="datos.js"></script>
+<script src="app.js"></script>
+<script src="paginas.js"></script>
+
+</body>
+</html>
