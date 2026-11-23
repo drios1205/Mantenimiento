@@ -1,0 +1,1 @@
+{"name":"ellado-dulce","private":true,"scripts":{"start":"node server.cjs","test:e2e":"cypress run","test:e2e:open":"cypress open"},"devDependencies":{"cypress":"^15.0.0"}}

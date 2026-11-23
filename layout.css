@@ -38,7 +38,7 @@ img {
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: 28px;
-    padding: 18px 36px; 
+    padding: 18px 36px;
 }
 
 .logo {
@@ -248,4 +248,34 @@ img {
     .footer {
         grid-template-columns: 1fr;
     }
+}
+/* Fondo original del sitio y colores originales del logo. */
+.navbar, .footer { background-color: #171b4f; }
+.navbar .logo-img, .footer .footer-logo-img {
+    filter: none;
+    mix-blend-mode: normal;
+}
+
+/* Nombre de la marca en blanco; corazón con su rojo original. */
+.navbar .logo strong,
+.footer .footer-logo h3 span {
+    color: #ffffff;
+}
+
+/* Alinear el símbolo con el nombre sin el margen general de los títulos. */
+.footer .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.footer .footer-logo h3 {
+    margin: 0;
+    line-height: 1.2;
+}
+.footer .footer-logo-img {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }

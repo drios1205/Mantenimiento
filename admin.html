@@ -12,37 +12,57 @@
     <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="diseno-compartido.css">
 </head>
 <body>
-
-<header class="navbar">
-    <div class="logo">
-        <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="logo-img">
-        <span>Ellado <strong>Dulce</strong></span>
-    </div>
-
-    <nav class="menu">
-            <a href="admin.html">admin</a>
-            <a href="logout.html" class="logout-header-btn">Cerrar sesión</a>
-    </nav>
-</header>
 
 <main class="admin-page">
 
     <section class="admin-header">
+        <div class="admin-brand">
+            <img src="imagenes/logo2019.svg" alt="Logo El Lado Dulce" class="logo-img">
+            <span>El <strong>Lado Dulce</strong></span>
+        </div>
         <div class="admin-title">
             <div>
                 <h1>Panel de administración</h1>
-                <p>Panel de demostración: muestra los registros guardados en este navegador. No tiene control de acceso de servidor.</p>
+                <p>Consulta los pedidos de tus clientes, actualiza su estado y gestiona la disponibilidad de los productos.</p>
+            </div>
+            <a href="logout.html" class="logout-btn admin-logout-btn">Cerrar sesión</a>
+        </div>
+    </section>
+
+    <section class="filter-card products-admin-card" aria-labelledby="disponibilidadTitulo">
+        <div class="records-header products-admin-header">
+            <div>
+                <h2 id="disponibilidadTitulo">Disponibilidad de productos <span id="contadorProductosAdmin">(0)</span></h2>
+                <p class="products-admin-subtitle">Clic para cambiar el estado del producto</p>
+            </div>
+        </div>
+        <div class="admin-products-grid" id="listaProductosAdmin">
+            <!-- Productos cargados con JavaScript -->
+        </div>
+        <div class="table-footer">
+            <p id="textoCantidadProductos">Mostrando productos</p>
+
+            <div class="pagination">
+                <button type="button" id="btnProdAnterior" aria-label="Página anterior de productos" disabled>‹</button>
+                <button type="button" class="active-page" id="paginaActualProductos">1</button>
+                <button type="button" id="btnProdSiguiente" aria-label="Siguiente página de productos" disabled>›</button>
             </div>
         </div>
     </section>
 
-    <section class="filter-card">
-        <h2>Buscar cliente</h2>
+    <section class="records-card">
+        <div class="records-header orders-card-header">
+            <h2>Pedidos <span id="contadorRegistros">(0)</span></h2>
+            <button type="button" class="clear-btn" id="btnLimpiar">
+                ↻ Limpiar filtros
+            </button>
+        </div>
 
-        <div class="filter-row">
-            <div class="field-group small-field">
+        <div class="orders-toolbar">
+            <div class="field-group">
                 <label for="buscarPor">Buscar por</label>
                 <select id="buscarPor">
                     <option value="todos">Todos</option>
@@ -53,70 +73,34 @@
                 </select>
             </div>
 
-            <div class="field-group search-field">
-                <label for="busquedaCliente">Buscar</label>
-                <input type="text" id="busquedaCliente" placeholder="Escribe el término de búsqueda">
+            <div class="field-group">
+                <label for="busquedaCliente">Cliente</label>
+                <input type="text" id="busquedaCliente" placeholder="Escribe nombre, cédula, celular o correo">
             </div>
 
-            <button type="button" class="search-btn" id="btnBuscar">
-                Buscar
-            </button>
-        </div>
-    </section>
-
-    <section class="filter-card second-filter">
-        <div class="filter-row">
-            <div class="field-group small-field">
-                <label for="buscarRegistro">Buscar registro</label>
-                <select id="buscarRegistro">
-                    <option value="todo">Todo</option>
-                    <option value="actividad">Actividad</option>
-                    <option value="pedido">Pedido</option>
-                    <option value="reserva">Reserva</option>
-                </select>
-            </div>
-
-            <div class="field-group small-field">
+            <div class="field-group">
                 <label for="estadoRegistro">Estado</label>
                 <select id="estadoRegistro">
                     <option value="todo">Todo</option>
-                    <option value="pendiente">Pendiente</option>
                     <option value="en proceso">En proceso</option>
                     <option value="listo">Listo</option>
                     <option value="entregado">Entregado</option>
-                    <option value="confirmada">Confirmada</option>
-                    <option value="realizada">Realizada</option>
                 </select>
             </div>
 
-            <div class="field-group date-field">
-                <label for="rangoFechas">Rango de fechas</label>
-                <input type="text" id="rangoFechas" value="" placeholder="día/mes/año">
-            </div>
-
-            <button type="button" class="clear-btn" id="btnLimpiar">
-                ↻ Limpiar filtros
-            </button>
-        </div>
-    </section>
-
-    <section class="records-card">
-        <div class="records-header">
-            <h2>Registros encontrados <span id="contadorRegistros">(0)</span></h2>
+            <div class="field-group" id="filtroFechaHost" data-input-id="rangoFechas"></div>
         </div>
 
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th>Tipo de registro</th>
                         <th>Cliente</th>
                         <th>Cédula</th>
                         <th>Celular</th>
                         <th>Correo</th>
                         <th>Fecha</th>
                         <th>Estado</th>
-                        <th>Acción</th>
                     </tr>
                 </thead>
 
@@ -127,7 +111,7 @@
         </div>
 
         <div class="table-footer">
-            <p id="textoCantidad">Mostrando registros</p>
+            <p id="textoCantidad">Mostrando pedidos</p>
 
             <div class="pagination">
                 <button type="button" id="btnPaginaAnterior" disabled>‹</button>
@@ -139,46 +123,11 @@
 
 </main>
 
-<footer class="footer">
-    <div class="footer-col">
-        <div class="footer-logo">
-            <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="footer-logo-img">
-            <h3>Ellado <span>Dulce</span></h3>
-        </div>
-        <p>Tu lugar favorito para endulzar cada momento.</p>
-    </div>
-
-    <div class="footer-col">
-        <h3>Horarios</h3>
-        <p>Lunes<br>1:00 p.m. - 8:00 p.m.</p>
-        <p>Martes a Domingo<br>1:00 p.m. - 9:00 p.m.</p>
-    </div>
-
-    <div class="footer-col">
-        <h3>Ubicación</h3>
-        <p>Brisas Mall, Av. Principal, San Miguelito, Provincia de Panamá.</p>
-        <a href="#">Cómo llegar →</a>
-    </div>
-
-    <div class="footer-col">
-        <h3>Contacto</h3>
-        <p>@elladodulce</p>
-        <p>+507 315-8752</p>
-    </div>
-
-    <div class="copyright">
-        © 2026 Ellado Dulce. Todos los derechos reservados.
-    </div>
-</footer>
-
-
-
-
-
 <noscript><p class="demo-note">Activa JavaScript para usar el catálogo, tu cuenta y el carrito.</p></noscript>
 <script src="datos.js"></script>
 <script src="app.js"></script>
 <script src="paginas.js"></script>
+<script src="calendario.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>

@@ -5,42 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pago | Ellado Dulce</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="pago.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="diseno-compartido.css">
 </head>
 <body>
 
 <header class="navbar">
-    <div class="logo">
-        <img src="imagenes/logo2019.png" class="logo-img" alt="Logo Ellado Dulce">
-        <span>Ellado <strong>Dulce</strong></span>
-    </div>
-
-    <nav class="menu">
-        <a href="index.html">Inicio</a>
-
-        <div class="dropdown">
-            <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
-            <div class="dropdown-menu">
-                <a href="boquitas-dulces.html">Boquitas Dulces</a>
-                <a href="boquitas-saladas.html">Boquitas Saladas</a>
-            </div>
+        <div class="logo">
+            <img src="imagenes/logo2019.svg" class="logo-img" alt="Logo El Lado Dulce" />
+            <span>El <strong>Lado Dulce</strong></span>
         </div>
 
-        <a href="Pasteles.html">Pasteles</a>
-        <a href="reservas.html">Reservas</a>
-        <a href="actividades.html">Actividades</a>
-        <a href="Nosotros.html">Nosotros</a>
-        <a href="mi-cuenta.html">Mi cuenta</a>
-    </nav>
+        <nav class="menu">
+            <a href="index.html">Inicio</a>
 
-    <div class="cart">
-        <a href="pantalla-de-carrito.html">
-            <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
-        </a>
-    </div>
-</header>
+            <div class="dropdown">
+                <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
+                <div class="dropdown-menu">
+                    <a href="boquitas-dulces.html">Boquitas Dulces</a>
+                    <a href="boquitas-saladas.html">Boquitas Saladas</a>
+                </div>
+            </div>
+            <a href="Nosotros.html">Nosotros</a>
+            <a href="mi-cuenta.html">Mi cuenta</a>
+        </nav>
+
+        <div class="cart">
+            <a href="pantalla-de-carrito.html">
+                <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+            </a>
+        </div>
+    </header>
 
 <main class="payment-page">
 
@@ -48,7 +48,7 @@
 
     <section class="payment-grid">
 
-        <form id="pagoForm" class="payment-card">
+        <form novalidate id="pagoForm" class="payment-card">
 
             <h2>Pago con tarjeta</h2>
 
@@ -57,8 +57,13 @@
             </p>
 
             <div class="form-group">
+                <label for="tarjetaGuardada">Tarjeta ficticia vinculada</label>
+                <select id="tarjetaGuardada" data-cy="tarjeta"><option value="">Ingresar datos de prueba</option></select>
+                <p id="saldoTarjeta" data-cy="saldo"></p>
+            </div>
+            <div class="form-group">
                 <label for="nombreTarjeta">Nombre en la tarjeta</label>
-                <input type="text" id="nombreTarjeta" placeholder="Ej: Benjamin Romero" required>
+                <input type="text" id="nombreTarjeta" placeholder="Nombre del titular de prueba" required>
             </div>
 
             <div class="form-group">
@@ -78,8 +83,10 @@
                 </div>
             </div>
 
-            <button type="submit" class="pay-btn">
-                Confirmar pago simulado
+            <p class="app-message payment-error" role="alert" aria-live="assertive"></p>
+
+            <button type="submit" class="pay-btn" data-cy="confirmar-pago">
+                Confirmar pago
             </button>
 
             <a href="pantalla-de-carrito.html" class="back-cart">
@@ -103,8 +110,6 @@
                 <span>ITBMS (7%)</span>
                 <strong><span id="pago-itbms">B/.0.00</span></strong>
             </div>
-
-            <div class="summary-line" id="pago-descuento-line" hidden><span>Descuento por puntos</span><strong id="pago-descuento"></strong></div>
             <div class="summary-divider"></div>
 
             <div class="summary-line total-line">
@@ -116,6 +121,18 @@
 
     </section>
 
+<dialog id="compraExitosa" aria-labelledby="tituloCompra" data-cy="compra-exitosa">
+    <section id="confirmacionCompra">
+        <h2 id="tituloCompra">Compra exitosa</h2>
+        <p>Tu compra se ha realizado correctamente.</p>
+        <p id="numeroPedido" data-cy="numero-pedido"></p>
+    </section>
+    <section id="vistaFactura" hidden>
+        <div class="receipt-toolbar"><h2 id="tituloFactura">Factura</h2><button type="button" id="descargarFactura">Descargar factura</button></div>
+        <div id="facturaContenido"></div>
+    </section>
+    <div class="receipt-close"><button type="button" id="verFactura" data-cy="ver-factura">Ver factura</button><button type="button" id="cerrarCompra" data-cy="cerrar-compra">Ir al inicio</button></div>
+</dialog>
 </main>
 
 

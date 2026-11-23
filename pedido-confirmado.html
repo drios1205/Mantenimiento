@@ -4,27 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedido confirmado | Ellado Dulce</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="inicio.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="diseno-compartido.css">
 </head>
 <body>
+<header class="navbar">
+        <div class="logo">
+            <img src="imagenes/logo2019.svg" class="logo-img" alt="Logo El Lado Dulce" />
+            <span>El <strong>Lado Dulce</strong></span>
+        </div>
 
-<main style="min-height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 40px;">
-    <div style="background: #ffffff; border-radius: 24px; padding: 46px; box-shadow: 0 14px 34px rgba(16, 25, 66, 0.08); max-width: 520px;">
-        <h1 style="color:#101942;">Pedido realizado exitosamente</h1>
+        <nav class="menu">
+            <a href="index.html">Inicio</a>
 
-        <p style="color:#625f7d; margin-top: 12px;">
-            Tu compra simulada quedó guardada en este navegador. No se realizó ningún cobro.
+            <div class="dropdown">
+                <a href="boquitas-dulces.html" class="dropdown-toggle">Boquitas <span class="arrow">∨</span></a>
+                <div class="dropdown-menu">
+                    <a href="boquitas-dulces.html">Boquitas Dulces</a>
+                    <a href="boquitas-saladas.html">Boquitas Saladas</a>
+                </div>
+            </div>
+            <a href="Nosotros.html">Nosotros</a>
+            <a href="mi-cuenta.html">Mi cuenta</a>
+        </nav>
+
+        <div class="cart">
+            <a href="pantalla-de-carrito.html">
+                <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+            </a>
+        </div>
+    </header>
+
+<main class="confirmation-page">
+    <div class="confirmation-card">
+        <h1>Pedido realizado exitosamente</h1>
+
+        <p>
+            Tu compra se ha realizado correctamente.
         </p>
 
         <p id="confirmacion"></p>
         <br>
 
-        <a href="mi-cuenta.html" style="display:inline-block;background-color:#ff4f8b;color:white;padding:12px 24px;border-radius:999px;text-decoration:none;font-weight:800;">
+        <a class="confirm-primary" href="mi-cuenta.html">
             Ver mi cuenta
         </a>
 
-        <a href="index.html" style="display:inline-block;margin-left:10px;color:#ff4f8b;font-weight:800;text-decoration:none;">
+        <a class="confirm-secondary" href="index.html">
             Volver al inicio
         </a>
     </div>
