@@ -13,7 +13,7 @@
     font-size: 52px;
     font-weight: 800;
     margin-bottom: 12px;
-    letter-spacing: 1px;
+    letter-spacing: normal;
 }
 
 .hero-content p {
@@ -289,3 +289,5 @@
         height: 180px;
     }
 }
+.history-container { grid-template-columns: 1fr; max-width: 850px; margin: auto; }
+.history-text a { color: #a91d52; line-height: 2; }

@@ -18,12 +18,31 @@ window.App = (() => {
         d.setDate(d.getDate() + 1);
         return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
     };
+    const demoAccounts = [{"id": "demo-cliente", "nombre": "Cliente", "apellido": "Demo", "usuario": "cliente_demo", "correo": "cliente_demo@elladodulce.test", "telefono": "60001001", "rol": "cliente", "salt": "f279001f-cf9c-4367-b05e-fd8a2cb15b97", "hash": "3c372bd11860addad475156ca356794400b2fa343d394f8b2fd7f19f619199a1"}, {"id": "demo-admin", "nombre": "Administrador", "apellido": "Demo", "usuario": "admin_demo", "correo": "admin_demo@elladodulce.test", "telefono": "60001002", "rol": "admin", "salt": "bfebcad0-e862-449d-8c6b-edef4679cbd1", "hash": "48704eeaa1fccc804a19e6b7774ac623c509ead84d41418ad0d67381bc99a750"}];
+    function deliveryMin() {
+        const parts = Object.fromEntries(new Intl.DateTimeFormat("en-US", { timeZone: "America/Panama", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date()).filter(p => p.type !== "literal").map(p => [p.type, p.value]));
+        return new Date(Date.UTC(+parts.year, +parts.month - 1, +parts.day + 2)).toISOString().slice(0, 10);
+    }
+    function validateDeliveryDate(value) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "") || Number.isNaN(Date.parse(value)) || new Date(value).toISOString().slice(0, 10) !== value || value < deliveryMin()) throw new Error("Elige una fecha de entrega a partir de pasado mañana (" + dateText(deliveryMin()) + ").");
+        return value;
+    }
     function db() {
         const raw = localStorage.getItem(DB_KEY);
-        if (!raw) return emptyDB();
-        const data = JSON.parse(raw);
+        const data = raw ? JSON.parse(raw) : emptyDB();
         if (!Array.isArray(data.usuarios) || !Array.isArray(data.registros) || !data.carritos || typeof data.carritos !== "object") {
             throw new Error("No se pueden leer los datos locales de esta demostración.");
+        }
+        if (data.demoAccountsVersion !== 1) {
+            for (const account of demoAccounts) {
+                if (!data.usuarios.some(u => String(u.usuario || "").toLowerCase() === account.usuario || u.correo === account.correo)) data.usuarios.push({ ...account });
+            }
+            data.demoAccountsVersion = 1;
+            save(data);
+        }
+        if (data.usuarios.some(u => Object.hasOwn(u, "puntos"))) {
+            data.usuarios.forEach(u => { delete u.puntos; });
+            save(data);
         }
         return data;
     }
@@ -40,8 +59,15 @@ window.App = (() => {
         const current = user();
         if (!current) {
             const next = location.pathname.split("/").pop() + location.search;
-            location.replace("login.html?next=" + encodeURIComponent(safeNext(next)));
+            const purchase = ["pantalla-de-carrito.html", "pago.html", "detalle-boquita.html"].includes(location.pathname.split("/").pop());
+            location.replace("login.html?next=" + encodeURIComponent(safeNext(next)) + (purchase ? "&reason=compra" : ""));
         }
+        return current;
+    }
+    function requireAdmin() {
+        const current = requireUser();
+        if (!current) return null;
+        if (current.rol !== "admin") { location.replace("mi-cuenta.html"); return null; }
         return current;
     }
     function message(text, error = false, parent = document.querySelector("main") || document.body) {
@@ -69,15 +95,15 @@ window.App = (() => {
         const salt = uid();
         const hash = await passwordHash(fields.contrasena, salt);
         const data = db();
-        if (data.usuarios.some(u => u.usuario.toLowerCase() === normalized.usuario.toLowerCase() || u.correo === normalized.correo || u.telefono === normalized.telefono)) {
+        if (data.usuarios.some(u => String(u.usuario || "").toLowerCase() === normalized.usuario.toLowerCase() || u.correo === normalized.correo || u.telefono === normalized.telefono)) {
             throw new Error("El usuario, correo o teléfono ya está registrado en este navegador.");
         }
-        data.usuarios.push({ ...normalized, id: uid(), salt, hash, puntos: 0 });
+        data.usuarios.push({ ...normalized, id: uid(), salt, hash, rol: "cliente" });
         save(data);
     }
     async function login(name, password) {
         const normalized = name.trim().toLowerCase();
-        const current = db().usuarios.find(u => u.usuario.toLowerCase() === normalized || u.correo === normalized);
+        const current = db().usuarios.find(u => String(u.usuario || "").toLowerCase() === normalized || u.correo === normalized);
         if (!current || await passwordHash(password, current.salt) !== current.hash) throw new Error("Usuario o contraseña incorrectos.");
         sessionStorage.setItem(SESSION_KEY, current.id);
         return current;
@@ -90,48 +116,55 @@ window.App = (() => {
     }
     function cart() {
         const current = user();
-        const items = current ? db().carritos[current.id] || [] : [];
+        if (!current || current.rol === "admin") return [];
+        const items = db().carritos[current.id] || [];
         return items.map(item => {
             const product = Catalogo.productos.find(p => p.id === item.id);
-            return product ? { ...item, precio: product.precio } : item;
+            return product ? { ...item, precio: product.precio, unidadesPorBandeja: product.unidadesPorBandeja, fechaEntrega: item.fechaEntrega || deliveryMin() } : item;
         });
     }
     function saveCart(items) {
         const current = user();
         if (!current) throw new Error("Inicia sesión para usar el carrito.");
+        if (current.rol === "admin") throw new Error("El administrador no puede usar el carrito ni realizar compras.");
         const data = db();
         data.carritos[current.id] = items;
         save(data);
     }
+    function isAvailable(productId) {
+        const list = db().noDisponibles;
+        return !Array.isArray(list) || !list.map(Number).includes(Number(productId));
+    }
+    function setProductAvailability(productId, available) {
+        if (user()?.rol !== "admin") throw new Error("Solo el administrador puede modificar la disponibilidad de los productos.");
+        const id = Number(productId);
+        if (!Catalogo.productos.some(p => p.id === id)) throw new Error("No se encontró el producto.");
+        const data = db();
+        const unavailable = new Set(Array.isArray(data.noDisponibles) ? data.noDisponibles.map(Number) : []);
+        if (available) unavailable.delete(id);
+        else unavailable.add(id);
+        data.noDisponibles = [...unavailable];
+        save(data);
+        return Boolean(available);
+    }
     function addProduct(product) {
-        if (!requireUser()) return false;
+        const current = requireUser();
+        if (!current) return false;
+        if (current.rol === "admin") throw new Error("El administrador no puede usar el carrito ni realizar compras.");
+        if (!isAvailable(product.id)) throw new Error("Este producto no está disponible en este momento.");
+        product = { ...product, fechaEntrega: validateDeliveryDate(product.fechaEntrega || deliveryMin()) };
         const items = cart();
-        const key = [product.id, product.sabor || "", product.toppings || "", product.notas || ""].join("|");
+        const key = [product.fechaEntrega, product.id, product.sabor || "", product.toppings || "", product.notas || ""].join("|");
         const existing = items.find(item => item.clave === key);
         if (existing) existing.cantidad += product.cantidad;
         else items.push({ ...product, clave: key });
         saveCart(items);
         return true;
     }
-    function available(activity, data = db()) {
-        const booked = data.registros.filter(r => r.tipo === "Actividad" && r.itemId === activity.id && r.estado !== "Cancelada").length;
-        return Math.max(0, activity.cupos - booked);
-    }
-    function activityOpen(activity) {
-        return activity.estado === "Disponible" && activity.fecha >= today() && available(activity) > 0;
-    }
-    function occupiedDates(data = db()) {
-        return data.registros.filter(r => r.tipo === "Reserva" && r.estado !== "Cancelada").map(r => r.fechaEvento);
-    }
-    function validateReservation(details) {
-        if (!details.nombrePrincipal || !details.nombrePrincipal.trim()) throw new Error("Completa el nombre de la reserva.");
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(details.fechaReserva || "") || details.fechaReserva < tomorrow() || Number.isNaN(Date.parse(details.fechaReserva))) throw new Error("La reserva debe hacerse con al menos un día de anticipación.");
-        if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(details.horaReserva || "")) throw new Error("Selecciona una hora válida.");
-        if (occupiedDates().includes(details.fechaReserva)) throw new Error("Esa fecha ya está ocupada. Elige otro día.");
-    }
     function beginCheckout(details) {
         const current = requireUser();
         if (!current) return;
+        if (current.rol === "admin") throw new Error("El administrador no puede realizar compras.");
         const pending = { ...details, id: uid(), userId: current.id };
         quote(pending);
         sessionStorage.setItem(CHECKOUT_KEY, JSON.stringify(pending));
@@ -144,32 +177,59 @@ window.App = (() => {
     // Totales calculados a partir del catálogo; los datos de tarjeta nunca se guardan.
     function quote(pending) {
         const current = user();
+        if (current?.rol === "admin") throw new Error("El administrador no puede realizar compras.");
         if (!pending || !current || pending.userId !== current.id) throw new Error("Selecciona una compra antes de continuar al pago.");
         let items;
         if (pending.tipo === "pedido") {
             items = cart().map(item => {
                 const product = Catalogo.productos.find(p => p.id === item.id);
                 if (!product || !Number.isInteger(item.cantidad) || item.cantidad < 1) throw new Error("Revisa los productos de tu carrito.");
-                return { ...item, nombre: product.nombre, precio: product.precio };
+                if (!isAvailable(product.id)) throw new Error(`El producto "${product.nombre}" no está disponible en este momento.`);
+                validateDeliveryDate(item.fechaEntrega);
+                return { ...item, nombre: product.nombre, precio: product.precio, unidadesPorBandeja: product.unidadesPorBandeja };
             });
             if (!items.length) throw new Error("Tu carrito está vacío.");
-        } else if (pending.tipo === "actividad") {
-            const activity = Catalogo.actividades.find(a => a.id === Number(pending.itemId));
-            if (!activity || !activityOpen(activity)) throw new Error("Esta actividad ya no tiene cupos disponibles.");
-            items = [{ ...activity, cantidad: 1 }];
-        } else if (pending.tipo === "reserva") {
-            const reservation = Catalogo.reservas.find(r => r.id === Number(pending.itemId));
-            if (!reservation) throw new Error("La reserva seleccionada no existe.");
-            validateReservation(pending);
-            items = [{ ...reservation, cantidad: 1 }];
-        } else throw new Error("Selecciona un tipo de compra válido.");
+        } else throw new Error("Selecciona un pedido válido.");
         const cents = items.reduce((sum, item) => sum + Math.round(item.precio * 100) * item.cantidad, 0);
-        const pointsUsed = pending.tipo === "pedido" && pending.usarPuntos ? Math.min(current.puntos, Math.floor(cents / 10)) : 0;
-        const discountCents = pointsUsed * 10;
         const taxCents = Math.round(cents * 0.07);
-        return { items, subtotal: cents / 100, itbms: taxCents / 100, descuento: discountCents / 100, total: (cents + taxCents - discountCents) / 100, puntosUsados: pointsUsed, puntosGanados: pending.tipo === "pedido" ? Math.floor((cents - discountCents) / 100) : 0 };
+        return { items, subtotal: cents / 100, itbms: taxCents / 100, total: (cents + taxCents) / 100 };
     }
-    function confirmCheckout() {
+    // Exclusivamente tarjetas ficticias del simulador; nunca introducir tarjetas reales.
+    function paymentCards() {
+        const current = user();
+        if (!current) throw new Error("Inicia sesión para pagar.");
+        const data = db();
+        data.tarjetas ||= {};
+        if (!data.tarjetas[current.id]) {
+            data.tarjetas[current.id] = [
+                { id: "demo-credito", nombre: "Crédito de prueba", numero: "4111111111111111", vencimiento: "12/35", saldoCentavos: 10000 },
+                { id: "demo-debito", nombre: "Débito de prueba", numero: "4000000000000002", vencimiento: "12/35", saldoCentavos: 100 }
+            ];
+            save(data);
+        }
+        if (!data.tarjetas[current.id].some(card => card.id === "demo-respaldo")) {
+            data.tarjetas[current.id].push({ id: "demo-respaldo", nombre: "Tarjeta de respaldo", numero: "5555555555554444", vencimiento: "12/35", saldoCentavos: 25000 });
+            save(data);
+        }
+        return data.tarjetas[current.id];
+    }
+    function validateCard(fields) {
+        if (!fields || !fields.nombre?.trim() || !fields.numero || !fields.vencimiento || !fields.cvv) throw new Error("Completa todos los campos de la tarjeta.");
+        const number = fields.numero.replace(/ /g, "");
+        let sum = 0;
+        if (!/^\d{16}$/.test(number)) throw new Error("Revisa el número de tu tarjeta.");
+        [...number].reverse().forEach((n, i) => { let v = Number(n); if (i % 2) v = v * 2 > 9 ? v * 2 - 9 : v * 2; sum += v; });
+        if (sum % 10) throw new Error("Revisa el número de tu tarjeta.");
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(fields.vencimiento)) throw new Error("Revisa la fecha de tu tarjeta.");
+        const [month, year] = fields.vencimiento.split("/").map(Number);
+        if (new Date(2000 + year, month, 1) <= new Date()) throw new Error("La tarjeta está vencida. Utiliza otra tarjeta.");
+        if (!/^\d{3,4}$/.test(fields.cvv)) throw new Error("Revisa el CVV de tu tarjeta.");
+        const card = paymentCards().find(c => c.numero === number);
+        if (!card) throw new Error("Utiliza una de las tarjetas ficticias indicadas en esta página.");
+        if (card.vencimiento !== fields.vencimiento || fields.cvv !== "123") throw new Error("Revisa los datos de tu tarjeta. El CVV de prueba es 123.");
+        return card;
+    }
+    function confirmCheckout(fields) {
         const pending = pendingCheckout();
         const current = user();
         if (!pending || !current || pending.userId !== current.id) throw new Error("No hay una compra pendiente para esta cuenta.");
@@ -177,42 +237,48 @@ window.App = (() => {
         let records = data.registros.filter(r => r.checkoutId === pending.id);
         if (!records.length) {
             const totals = quote(pending);
+            const card = validateCard(fields);
+            const amount = Math.round(totals.total * 100);
+            // Volver a leer tras inicializar las tarjetas de cuentas existentes.
+            data.tarjetas = db().tarjetas;
+            const storedCard = data.tarjetas[current.id].find(c => c.id === card.id);
+            if (!Number.isSafeInteger(storedCard.saldoCentavos) || storedCard.saldoCentavos < amount) throw new Error("Pago rechazado: saldo insuficiente.");
+            storedCard.saldoCentavos -= amount;
+            data.pagos ||= [];
+            data.pagos.push({ id: pending.id, userId: current.id, tarjetaId: card.id, totalCentavos: amount, estado: "Pagado", fecha: new Date().toISOString() });
             const type = { pedido: "Pedido", actividad: "Actividad", reserva: "Reserva" }[pending.tipo];
-            let remainingDiscount = Math.round(totals.descuento * 100);
             let remainingTax = Math.round(totals.itbms * 100);
             records = totals.items.map((item, index) => {
                 const cents = Math.round(item.precio * 100) * item.cantidad;
-                const discount = Math.min(remainingDiscount, cents);
                 const tax = index === totals.items.length - 1 ? remainingTax : Math.min(remainingTax, Math.round(cents * 0.07));
-                remainingDiscount -= discount;
                 remainingTax -= tax;
-                return { id: uid(), checkoutId: pending.id, userId: current.id, itemId: item.id, tipo: type, nombre: item.nombre, cantidad: item.cantidad, total: (cents + tax - discount) / 100, estado: type === "Pedido" ? "Pendiente" : "Confirmada", fecha: today(), fechaEvento: pending.tipo === "reserva" ? pending.fechaReserva : item.fecha || "", hora: pending.horaReserva || item.hora || "", notas: item.notas || pending.decoracionDescripcion || "", nombrePrincipal: pending.nombrePrincipal || "", confirmacion: `${type.slice(0, 3).toUpperCase()}-${uid().slice(0, 8).toUpperCase()}` };
+                return { id: uid(), checkoutId: pending.id, pagoEstado: "Pagado", userId: current.id, itemId: item.id, fechaEntrega: item.fechaEntrega, precioBandeja: item.precio, unidadesPorBandeja: item.unidadesPorBandeja, tipo: type, nombre: item.nombre, cantidad: item.cantidad, total: (cents + tax) / 100, estado: type === "Pedido" ? "En proceso" : "Confirmada", fecha: today(), fechaEvento: pending.tipo === "reserva" ? pending.fechaReserva : item.fecha || "", hora: pending.horaReserva || item.hora || "", notas: item.notas || pending.decoracionDescripcion || "", nombrePrincipal: pending.nombrePrincipal || "", confirmacion: `${type.slice(0, 3).toUpperCase()}-${uid().slice(0, 8).toUpperCase()}` };
             });
             data.registros.push(...records);
-            const storedUser = data.usuarios.find(u => u.id === current.id);
-            storedUser.puntos = storedUser.puntos - totals.puntosUsados + totals.puntosGanados;
             if (pending.tipo === "pedido") data.carritos[current.id] = [];
             save(data);
         }
         sessionStorage.setItem("ellado_ultima_confirmacion", records[0].checkoutId);
         sessionStorage.removeItem(CHECKOUT_KEY);
-        location.replace("pedido-confirmado.html");
+        return records;
     }
     function adminRecords() {
+        if (user()?.rol !== "admin") throw new Error("Solo el administrador puede consultar los pedidos.");
         const data = db();
-        return data.registros.slice().reverse().map(record => {
+        return data.registros.filter(r => r.tipo === "Pedido").slice().reverse().map(record => {
             const owner = data.usuarios.find(u => u.id === record.userId) || {};
-            return { ...record, cliente: `${owner.nombre || ""} ${owner.apellido || ""}`.trim(), cedula: "", celular: owner.telefono || "", correo: owner.correo || "", fecha: dateText(record.fechaEvento || record.fecha) + " " + record.hora, detalle: `${record.confirmacion}\n${record.nombre}\nCantidad: ${record.cantidad}\nTotal: ${money(record.total)}\n${record.nombrePrincipal}\n${record.notas}` };
+            const estadoActual = record.estado === "Pendiente" ? "En proceso" : record.estado;
+            return { ...record, estado: estadoActual, cliente: `${owner.nombre || ""} ${owner.apellido || ""}`.trim(), cedula: "", celular: owner.telefono || "", correo: owner.correo || "", fecha: dateText(record.fechaEntrega || record.fechaEvento || record.fecha) + " " + record.hora, detalle: `${record.confirmacion}\nEntrega: ${dateText(record.fechaEntrega)}\n${record.nombre}\nBandejas: ${record.cantidad} (${record.unidadesPorBandeja || ""} unidades por bandeja)\nTotal: ${money(record.total)}\n${record.nombrePrincipal}\n${record.notas}` };
         });
     }
     function updateStatus(id, status) {
-        if (!user()) throw new Error("Inicia sesión para abrir el panel local.");
-        if (!["Pendiente", "En proceso", "Listo", "Entregado"].includes(status)) throw new Error("Estado no válido.");
+        if (user()?.rol !== "admin") throw new Error("Solo el administrador puede modificar los pedidos.");
+        if (!["En proceso", "Listo", "Entregado"].includes(status)) throw new Error("Estado no válido.");
         const data = db();
         const record = data.registros.find(r => r.id === id && r.tipo === "Pedido");
         if (!record) throw new Error("No se encontró el pedido.");
         record.estado = status;
         save(data);
     }
-    return { db, user, uid, money, escapeHTML, dateText, today, tomorrow, safeNext, requireUser, message, register, login, logout, cart, saveCart, addProduct, available, activityOpen, occupiedDates, validateReservation, beginCheckout, pendingCheckout, quote, confirmCheckout, adminRecords, updateStatus };
+    return { deliveryMin, validateDeliveryDate, db, user, uid, money, escapeHTML, dateText, today, tomorrow, safeNext, requireUser, requireAdmin, message, register, login, logout, isAvailable, setProductAvailability, cart, saveCart, addProduct, beginCheckout, pendingCheckout, quote, paymentCards, validateCard, confirmCheckout, adminRecords, updateStatus };
 })();

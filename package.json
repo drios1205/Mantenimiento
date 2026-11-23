@@ -1,23 +1,11 @@
 {
-  "name": "mantenimiento",
-  "version": "1.0.0",
-  "description": "",
-  "main": "admin.js",
+  "name": "ellado-dulce",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.cjs",
+    "test:e2e": "cypress run",
+    "test:e2e:open": "cypress open"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/drios1205/Mantenimiento.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/drios1205/Mantenimiento/issues"
-  },
-  "homepage": "https://github.com/drios1205/Mantenimiento#readme",
   "devDependencies": {
     "cypress": "^16.3.0"
   },
@@ -25,3 +13,4 @@
     "cypress@16.3.0": true
   }
 }
+

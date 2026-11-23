@@ -12,12 +12,15 @@
     <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="inicio.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="diseno-compartido.css">
 </head>
-<body>
+<body class="home-page">
+<div class="home-masthead">
+<img class="hero-backdrop" src="imagenes/Index/portada-boquitas.png" alt="Bandeja con boquitas dulces y saladas sobre una mesa azul" fetchpriority="high">
 
     <header class="navbar">
         <div class="logo">
-            <img src="imagenes/logo2019.png" class="logo-img" alt="Logo El Lado Dulce" />
+            <img src="imagenes/logo2019.svg" class="logo-img" alt="Logo El Lado Dulce" />
             <span>El <strong>Lado Dulce</strong></span>
         </div>
 
@@ -34,7 +37,7 @@
             <a href="Nosotros.html">Nosotros</a>
             <a href="mi-cuenta.html">Mi cuenta</a>
         </nav>
-        
+
         <div class="cart">
             <a href="pantalla-de-carrito.html">
                 <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
@@ -42,160 +45,45 @@
         </div>
     </header>
 
-    <main>
-
-        <section class="hero">
-            <div class="hero-inner">
-                <div class="hero-content">
-                    <h1>Endulza tu día <br><span>con Ellado Dulce</span></h1>
-                    <p>
-                        Helados, crepes, cafés, pasteles personalizados, boquitas para eventos
-                        y un rincón de noticias reposteras para los amantes del buen dulce.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section container">
-            <h2><span></span> Productos destacados</h2>
-
-            <div class="product-grid">
-    <article class="product-card">
-        <div class="product-img">
-            <img src="imagenes/Index/bandejaDeTequeños.jpg" alt="Bandeja de tequeños">
-        </div>
-        <h3>tequeños venezolanos</h3>
-        <p class="price">$15.50</p>
-        <a href="boquitas-saladas.html" class="small-btn">Ver más</a>
-    </article>
-
-    <article class="product-card">
-        <div class="product-img">
-            <img src="imagenes/Index/empanadasSurtidas.jpg" alt="Mini Empanaditas Surtidas">
-        </div>
-        <h3>Mini Empanaditas Surtidas</h3>
-        <p class="price">$18.00</p>
-        <a href="boquitas-saladas.html" class="small-btn">Ver más</a>
-    </article>
-
-    <article class="product-card">
-        <div class="product-img">
-            <img src="imagenes/Index/Mini-Quiche-Lorraine.jpg" alt="Mini Quiches Lorraine">
-        </div>
-        <h3>Mini Quiches Lorraine (4 uds)</h3>
-        <p class="price">$14.50</p>
-        <a href="boquitas-saladas.html" class="small-btn">Ver más</a>
-    </article>
-
-    <article class="product-card">
-        <div class="product-img">
-            <img src="imagenes/Index/cotte-cachitos.jpeg" alt="Cachitos de Jamón y Queso">
-        </div>
-        <h3>Cachitos de Jamón y Queso</h3>
-        <p class="price">$22.00</p>
-        <a href="boquitas-saladas.html" class="small-btn">Ver más</a>
-    </article>
-	</div>
-        </section>
-        <section class="reserve-band">
-            <div class="reserve-section">
-                <div class="reserve-info">
-                    <h2><span></span> Reserva de local</h2>
-                    <p>
-                        Celebra en nuestro espacio con decoración personalizada,
-                        ambiente acogedor y un menú inolvidable para tu evento especial.
-                    </p>
-
-                    <div class="hero-buttons">
-                        <a href="reservas.html" class="btn btn-primary">Reservar ahora</a>
-                    </div>
-                </div>
-
-                <div class="reserve-prices">
-                    <div class="price-box">
-                        <span>Precio base</span>
-                        <strong>$60</strong>
-                        <small>2 horas</small>
-                    </div>
-
-                    <div class="price-box dark-box">
-                        <span>Extra hora</span>
-                        <strong>$20</strong>
-                        <small>c/u</small>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-		<section class="section container news-section">
-    <h2><span></span> Noticias Dulces</h2>
-		
-		    <div class="activity-grid">
-		        <article class="activity-card pink">
-		            <div class="activity-icon" style="width: 80px; height: 80px; margin: 0 auto 15px auto; overflow: hidden; border-radius: 50%;">
-		                <img src="https://cimamastologia.com.ar/wp-content/uploads/2025/03/azucar.png" alt="Tendencias" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='imagenes/iconos/compra3 (1).png'">
-		            </div>
-		            <h3>Tendencias: Menos Azúcar, Más Sabor</h3>
-		            <p>La repostería artesanal evoluciona con el uso de azúcares naturales de frutas y alternativas orgánicas que mantienen intacto el sabor de siempre.</p>
-		            <a href="https://www.puratos.com.mx/es/blog/the-future-of-industrial-patisserie--strategic-trends-shaping-wh">Leer artículo</a>
-		        </article>
-		
-		        <article class="activity-card purple">
-		            <div class="activity-icon" style="width: 80px; height: 80px; margin: 0 auto 15px auto; overflow: hidden; border-radius: 50%;">
-		                <img src="https://edenred.com.uy/wp-content/uploads/2023/06/el-chocolate-un-placer-con-beneficios-nutricionales-1024x683.jpg" alt="Postres de autor" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='imagenes/iconos/medall (1).png'">
-		            </div>
-		            <h3>El Auge de los Postres de Autor</h3>
-		            <p>Expertos pasteleros revelan por qué las presentaciones individuales y las fusiones exóticas están dominando las mesas de dulces este año.</p>
-		            <a href="https://www.puratos.es/es/blog/taste-tomorrow/tendencias-de-pasteleria-para-2025">Leer artículo</a>
-		        </article>
-		        
-		        <article class="activity-card yellow">
-		            <div class="activity-icon" style="width: 80px; height: 80px; margin: 0 auto 15px auto; overflow: hidden; border-radius: 50%;">
-		                <img src="https://cdn0.uncomo.com/es/posts/6/3/9/como_endurecer_el_merengue_para_decorar_49936_600.jpg" alt="Azúcar Glass" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='imagenes/iconos/giftbox1.1 (1).png'">
-		            </div>
-		            <h3>Secretos del Azúcar Glass Perfecto</h3>
-		            <p>Descubre el impacto técnico que tiene la finura del azúcar en coberturas delicadas como el merengue y el glaseado para boquitas.</p>
-		            <a href="https://youtu.be/LE5V7qF9Olw?si=TBkXK0TsThLEtgz7">Leer artículo</a>
-		        </article>
-		    </div>
-		</section>
-        
-        <section class="points-wrapper">
-            <div class="points-section">
-                <div>
-                    <h2>Sistema de puntos</h2>
-                    <p>
-                        Cada compra te acerca a más beneficios. Acumula puntos en cada visita
-                        y canjéalos por productos, descuentos y beneficios especiales.
-                    </p>
-                </div>
-
-                <div class="points-steps">
-                    <div class="point-step">
-                        <img src="imagenes/iconos/compra3 (1).png" alt="Icono de compra">
-                        <p>Compra</p>
-                    </div>
-
-                    <div class="point-step">
-                        <img src="imagenes/iconos/medall (1).png" alt="Icono de puntos">
-                        <p>Puntos</p>
-                    </div>
-
-                    <div class="point-step">
-                        <img src="imagenes/iconos/giftbox1.1 (1).png" alt="Icono de premio">
-                        <p>Premio</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<section class="hero" aria-labelledby="bienvenidaTitulo">
+ <div class="hero-inner">
+  <div class="hero-content"><h1 id="bienvenidaTitulo">Los mejores momentos<br>tienen <span>algo rico.</span></h1>
+   <p>Dulces, saladas y para todos los gustos. Encuentra ese pequeño antojo que hace especial una reunión o simplemente tu día.</p>
+   <div class="hero-buttons"><a class="btn btn-primary" href="boquitas-dulces.html">Explorar boquitas dulces</a><a class="btn btn-outline" href="boquitas-saladas.html">Ver opciones saladas</a></div>
+   <p class="hero-note">Elige tus favoritas · Personaliza tu pedido · Disfruta y comparte</p>
+  </div>
+ </div>
+</section>
+</div>
+<main>
+<section class="section featured-section">
+ <div class="section-heading"><div><h2>Pequeños bocados, grandes antojos</h2></div><a class="text-link" href="boquitas-saladas.html">Ver catálogo salado →</a></div>
+ <div class="product-grid" id="destacados"></div>
+</section>
+<section class="occasion-band"><h2>Una reunión, una pausa,<br>una excusa para compartir.</h2><p>Combina tus boquitas favoritas y dale tu toque a la mesa.</p><a href="boquitas-dulces.html" class="btn btn-primary">Armar mi pedido →</a></section>
+<section class="section news-section">
+ <div class="section-heading"><div><h2>Un vistazo a nuestro lado dulce</h2><p>Recorre las fotos y encuentra inspiración para tu próximo pedido.</p></div><div class="news-controls"><button type="button" data-news-prev aria-label="Ver ideas anteriores">←</button><button type="button" data-news-next aria-label="Ver más ideas">→</button></div></div>
+ <div class="news-track" tabindex="0" aria-label="Ideas y fotos de boquitas">
+  <article class="news-card"><img loading="lazy" src="imagenes/Productos/Cupcakes Tradicionales-12.png" alt="Cupcakes tradicionales"><div><h3>Un toque dulce en tu mesa</h3><p>Descubre cupcakes, mini donas y otras opciones para acompañar tus momentos especiales.</p><a href="boquitas-dulces.html">Descubrir boquitas dulces →</a></div></article>
+  <article class="news-card"><img loading="lazy" src="imagenes/Index/empanadasSurtidas.jpg" alt="Empanaditas para compartir"><div><h3>La conversación sabe mejor así</h3><p>Tequeños, empanaditas y bocados salados para poner en el centro de la mesa.</p><a href="boquitas-saladas.html">Explorar boquitas saladas →</a></div></article>
+  <article class="news-card"><img loading="lazy" src="imagenes/Productos/Brownies de Fudge-13.png" alt="Brownies de chocolate"><div><h3>Un pequeño gusto para tu día</h3><p>Elige ese bocado de chocolate que quieres disfrutar a tu ritmo.</p><a href="detalle-boquita.html?id=13">Ver brownies de fudge →</a></div></article>
+  <article class="news-card"><img loading="lazy" src="imagenes/Productos/Canapés Gourmet Surtidos-17.png" alt="Canapés gourmet surtidos"><div><h3>Variedad en cada bocado</h3><p>Combina diferentes opciones del catálogo y revisa las cantidades antes de confirmar tu pedido.</p><a href="detalle-boquita.html?id=17">Ver canapés surtidos →</a></div></article>
+ </div>
+</section>
+<section class="moments-section" aria-labelledby="momentosTitulo"><div class="section moments-inner">
+<div class="section-heading"><div><h2 id="momentosTitulo">Momentos inolvidables</h2><p>Encuentros, sonrisas y pequeños instantes que forman parte de El Lado Dulce.</p></div></div>
+<div class="moments-track" tabindex="0" aria-label="Galería de momentos inolvidables"><figure class="moment-card"><div class="moment-photo"><img loading="lazy" src="imagenes/eventos/Screenshot 2026-06-25 134427.png" alt="Tardes compartidas y recuerdos especiales."></div><figcaption><h3>Sonrisas para recordar</h3><p>Tardes compartidas y recuerdos especiales.</p></figcaption></figure>
+<figure class="moment-card"><div class="moment-photo"><img loading="lazy" src="imagenes/eventos/Screenshot 2026-06-25 134353.png" alt="Los detalles que convierten un día en un recuerdo."></div><figcaption><h3>Pequeñas grandes alegrías</h3><p>Los detalles que convierten un día en un recuerdo.</p></figcaption></figure>
+<figure class="moment-card"><div class="moment-photo"><img loading="lazy" src="imagenes/eventos/happychild.png" alt="Un gusto para disfrutar y recordar."></div><figcaption><h3>Un momento dulce</h3><p>Un gusto para disfrutar y recordar.</p></figcaption></figure></div>
+</div></section>
 
     </main>
 
     <footer class="footer">
         <div class="footer-col">
             <div class="footer-logo">
-                <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="footer-logo-img">
-                <h3>Ellado <span>Dulce</span></h3>
+                <img src="imagenes/logo2019.svg" alt="Logo Ellado Dulce" class="footer-logo-img">
+                <h3>El <span>Lado Dulce</span></h3>
             </div>
             <p>Tu lugar favorito para endulzar cada momento.</p>
         </div>
@@ -209,7 +97,7 @@
         <div class="footer-col">
             <h3>Ubicación</h3>
             <p>Brisas Mall, Av. Principal, San Miguelito, Provincia de Panamá.</p>
-            <a href="#">Cómo llegar →</a>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=El+Lado+Dulce,+Brisas+Mall,+Av.+Principal,+San+Miguelito,+Provincia+de+Panam%C3%A1" target="_blank" rel="noopener noreferrer">Cómo llegar →</a>
         </div>
 
         <div class="footer-col">
@@ -227,6 +115,7 @@
 <script src="datos.js"></script>
 <script src="app.js"></script>
 <script src="paginas.js"></script>
+<script src="inicio.js"></script>
 
 </body>
 </html>

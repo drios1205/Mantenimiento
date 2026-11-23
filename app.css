@@ -6,3 +6,21 @@
 button:disabled { opacity: .55; cursor: not-allowed; }
 .local-admin-link { display: block; margin-top: 16px; color: #b72a5a; }
 .cart-count { margin-left: 5px; color: #b72a5a; font-weight: 700; }
+
+/* Encabezado compartido y margen de alineación para todos los módulos. */
+:root { --site-gutter: clamp(22px, 2.5vw, 48px); }
+body .navbar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; width: 100%; max-width: none; margin: 0; padding: 24px max(var(--site-gutter), calc((100% - 1280px) / 2)); gap: 28px; color: #fff; }
+body .navbar .logo { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; line-height: 1.25; white-space: nowrap; }
+body .navbar .logo-img { width: 30px; height: 30px; flex: 0 0 30px; object-fit: contain; }
+body .navbar .logo strong { color: #fff; }
+body .navbar .menu { display: flex; align-items: center; justify-content: center; gap: 30px; font-size: 14px; min-width: 0; }
+body .navbar .cart { justify-self: end; }
+body .navbar .cart a { display: flex; align-items: center; justify-content: center; padding: 9px 12px; border-radius: 999px; background: rgba(9,26,45,.65); }
+body .navbar .cart-img { width: 28px; height: 28px; object-fit: contain; }
+body .navbar .cart-count { position: static; margin-left: 5px; padding: 0; border-radius: 0; background: transparent; color: #fff; font-size: 14px; font-weight: 700; }
+@media(max-width: 1000px) { body .navbar { padding-top: 20px; padding-bottom: 20px; } body .navbar .menu { gap: 18px; } }
+@media(max-width: 820px) {
+ body .navbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 18px; padding-bottom: 18px; }
+ body .navbar .menu { order: 3; width: 100%; justify-content: flex-start; gap: 22px; overflow-x: auto; overflow-y: hidden; padding-bottom: 2px; }
+ body .navbar .cart { margin-left: auto; }
+}

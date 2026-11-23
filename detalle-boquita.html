@@ -12,16 +12,17 @@
     <link rel="stylesheet" href="layout.css">
     <link rel="stylesheet" href="detalle-producto.css">
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="diseno-compartido.css">
 </head>
 <body>
 
 <header class="navbar">
-    <div class="logo">
-        <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="logo-img">
-        <span>El <strong>Lado Dulce</strong></span>
-    </div>
+        <div class="logo">
+            <img src="imagenes/logo2019.svg" class="logo-img" alt="Logo El Lado Dulce" />
+            <span>El <strong>Lado Dulce</strong></span>
+        </div>
 
-    <nav class="menu">
+        <nav class="menu">
             <a href="index.html">Inicio</a>
 
             <div class="dropdown">
@@ -35,12 +36,12 @@
             <a href="mi-cuenta.html">Mi cuenta</a>
         </nav>
 
-    <div class="cart">
-        <a href="pantalla-de-carrito.html">
-            <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
-        </a>
-    </div>
-</header>
+        <div class="cart">
+            <a href="pantalla-de-carrito.html">
+                <img src="imagenes/iconos/carrito.png" alt="Carrito de compras" class="cart-img">
+            </a>
+        </div>
+    </header>
 
 <main class="product-page">
 
@@ -52,7 +53,7 @@
 
         <div class="product-gallery">
             <div class="main-product-image">
-                <img src="imagenes/logo2019.png" data-image="{{imagen}}" alt="{{nombre}}">
+                <img src="imagenes/logo2019.svg" data-image="{{imagen}}" alt="{{nombre}}">
             </div>
         </div>
 
@@ -70,7 +71,7 @@
                 </p>
             </div>
 
-            <form 
+            <form
                 id="orderForm"
                 class="order-form"
                 data-nombre="{{nombre}}"
@@ -79,34 +80,24 @@
                 data-imagen="{{imagen}}"
                 data-sabor="">
 
-                <div class="option-box">
-                    <h2>Cantidad</h2>
-
-                    <div class="quantity-control">
-                        <button type="button" id="btnRestar">−</button>
-                        <span id="cantidad">1</span>
-                        <button type="button" id="btnSumar" class="plus">+</button>
+                <div data-delivery-date data-input-id="fechaEntrega"></div>
+                <div class="purchase-row">
+                    <div class="purchase-quantity">
+                        <label id="cantidadLabel">Bandejas</label>
+                        <div class="quantity-control" role="group" aria-labelledby="cantidadLabel">
+                            <button type="button" id="btnRestar" aria-label="Quitar una bandeja">−</button>
+                            <span id="cantidad" aria-live="polite">1</span>
+                            <button type="button" id="btnSumar" class="plus" aria-label="Añadir una bandeja">+</button>
+                        </div>
                     </div>
+                    <div class="purchase-subtotal"><span>Subtotal</span><strong id="subtotalPrice" aria-live="polite">B/.{{precioTexto}}</strong></div>
                 </div>
-
-                <div class="option-box">
-                    <h2>Notas específicas</h2>
-
-                    <textarea 
-                        id="notasEspecificas"
-                        placeholder="Ej: entrega para evento, preferencia de empaque, indicaciones especiales..."></textarea>
-                </div>
-
-                <div class="summary-box">
-                    <span>Subtotal</span>
-                    <strong id="subtotalPrice">B/.{{precioTexto}}</strong>
-                    <small>El total se actualizará según la cantidad seleccionada.</small>
-
-                    <button type="button" class="cart-btn" id="btnAgregarCarrito">
-                        Agregar al carrito
-                    </button>
-                </div>
-
+                <details class="purchase-notes">
+                    <summary>Añadir una nota (opcional)</summary>
+                    <label for="notasEspecificas" class="purchase-note-label">Indicaciones para tu pedido</label>
+                    <textarea id="notasEspecificas" placeholder="Preferencias de empaque u otras indicaciones..."></textarea>
+                </details>
+                <button type="button" class="cart-btn" id="btnAgregarCarrito">Agregar al carrito</button>
             </form>
 
         </div>
@@ -118,8 +109,8 @@
 <footer class="footer">
     <div class="footer-col">
         <div class="footer-logo">
-            <img src="imagenes/logo2019.png" alt="Logo Ellado Dulce" class="footer-logo-img">
-            <h3>Ellado <span>Dulce</span></h3>
+            <img src="imagenes/logo2019.svg" alt="Logo Ellado Dulce" class="footer-logo-img">
+            <h3>El <span>Lado Dulce</span></h3>
         </div>
         <p>Tu lugar favorito para endulzar cada momento.</p>
     </div>
@@ -133,7 +124,7 @@
     <div class="footer-col">
         <h3>Ubicación</h3>
         <p>Brisas Mall, Av. Principal, San Miguelito, Provincia de Panamá.</p>
-        <a href="#">Cómo llegar →</a>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=El+Lado+Dulce,+Brisas+Mall,+Av.+Principal,+San+Miguelito,+Provincia+de+Panam%C3%A1" target="_blank" rel="noopener noreferrer">Cómo llegar →</a>
     </div>
 
     <div class="footer-col">
@@ -155,6 +146,7 @@
 <script src="datos.js"></script>
 <script src="app.js"></script>
 <script src="paginas.js"></script>
+<script src="calendario.js"></script>
 <script src="detalle-producto.js"></script>
 </body>
 </html>

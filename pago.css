@@ -135,6 +135,8 @@
 }
 
 .summary-product span {
+    display: block;
+    margin-top: 4px;
     color: #625f7d;
     font-size: 12px;
 }
@@ -176,3 +178,35 @@
         grid-template-columns: 1fr;
     }
 }
+/* Confirmación y factura */
+dialog { border: 0; border-radius: 16px; padding: 28px; max-width: min(90vw, 650px); color: #33252b; }
+dialog::backdrop { background: #0008; }
+dialog button { margin: 12px 8px 0 0; padding: 12px 20px; cursor: pointer; border-radius: 8px; }
+#facturaContenido { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.8; }
+#tarjetaGuardada { width: 100%; padding: 12px; }
+
+#compraExitosa { position: fixed; inset: 0; margin: auto; width: min(90vw,440px); max-height: 90dvh; overflow-y: auto; color: #171b4f; }
+#compraExitosa.showing-invoice { width: min(94vw,740px); max-width: 740px; max-height: 90dvh; overflow-y: auto; }
+#compraExitosa p { margin-top: 12px; color: #68677c; }
+#compraExitosa button { border: 1px solid #dcd5e1; background: #fff; color: #171b4f; border-radius: 999px; font-family: inherit; font-size: 13px; }
+#compraExitosa #verFactura,#compraExitosa #descargarFactura { background: #ff4f8b; color: white; border-color: #ff4f8b; }
+.receipt-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; margin-bottom: 24px; }
+.receipt-toolbar h2 { font-size: 26px; }
+.receipt-toolbar button { margin: 0; }
+#facturaContenido { white-space: normal; line-height: 1.65; }
+.receipt-heading { border-bottom: 1px solid #e9e2eb; padding-bottom: 20px; margin-bottom: 20px; }
+.receipt-heading h3 { font-size: 22px; }
+.receipt-heading p { font-size: 12px; overflow-wrap: anywhere; }
+.receipt-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12px; }
+.receipt-table th,.receipt-table td { padding: 12px 6px; border-bottom: 1px solid #e9e2eb; text-align: right; vertical-align: top; }
+.receipt-table th:first-child,.receipt-table td:first-child { text-align: left; width: 43%; }
+.receipt-table small { display: block; color: #68677c; font-size: 10px; margin-top: 5px; }
+.receipt-totals { margin: 22px 0 0 auto; max-width: 300px; }
+.receipt-totals div { display: flex; justify-content: space-between; gap: 20px; padding: 6px 0; font-size: 14px; }
+.receipt-totals div:last-child { border-top: 1px solid #e9e2eb; margin-top: 7px; padding-top: 12px; font-weight: 700; font-size: 17px; }
+.receipt-close { margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px; }
+@media(max-width:480px) { #compraExitosa.showing-invoice { padding: 20px 14px; } .receipt-table { font-size: 10px; } .receipt-table th,.receipt-table td { padding: 10px 3px; } }
+
+/* Aviso de pago rechazado junto a la acción de pago. */
+#pagoForm .payment-error:not(:empty) { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin: 0 0 18px; border: 1px solid #efcbd1; border-radius: 12px; background: #fff4f5; color: #b42332; font-size: 14px; font-weight: 600; line-height: 1.5; }
+#pagoForm .payment-error:not(:empty)::before { content: "!"; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 16px; height: 16px; border: 1.5px solid currentColor; border-radius: 50%; font-size: 11px; font-weight: 700; }
