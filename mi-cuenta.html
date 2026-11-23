@@ -70,12 +70,18 @@
                 <div class="section-header">
                     <h2>Mi historial</h2>
 
-                    <select id="historySelect" class="history-select">
-                        <option value="ordenes">Órdenes</option>
-                    </select>
+
                 </div>
 
-                <div class="history-section hidden" id="ordenesSection">
+                <form class="history-filters" id="historyFilters" role="search" aria-label="Filtrar pedidos">
+                    <label>Producto<input type="search" id="historySearch" placeholder="Buscar producto"></label>
+                    <label>Estado<select id="historyStatus"><option value="">Todos</option><option>En proceso</option><option>Listo</option><option>Entregado</option></select></label>
+                    <label>Pedido desde<input type="date" id="historyFrom"></label>
+                    <label>Pedido hasta<input type="date" id="historyTo"></label>
+                    <button type="reset" class="history-reset">Limpiar filtros</button>
+                </form>
+
+                <div class="history-section" id="ordenesSection">
                     <h3>Mis órdenes</h3>
 
                     <div class="history-table">
@@ -87,9 +93,15 @@
                             <span>Total</span>
                             <span>Estado</span>
                         </div>
-
-
-
+                        <div id="historyRows"></div>
+                    </div>
+                    <div class="history-pagination">
+                        <p id="historyCount" role="status" aria-live="polite"></p>
+                        <nav aria-label="Páginas del historial">
+                            <button type="button" id="historyPrevious" aria-label="Página anterior">←</button>
+                            <span id="historyPage" aria-live="polite"></span>
+                            <button type="button" id="historyNext" aria-label="Página siguiente">→</button>
+                        </nav>
                     </div>
                 </div>
 

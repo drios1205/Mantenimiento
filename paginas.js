@@ -74,23 +74,48 @@
     }
     function initAccount(current) {
         if (page !== "mi-cuenta.html") return;
-        const records = App.db().registros.filter(r => r.userId === current.id).reverse();
-        const row = cells => '<div class="table-row">' + cells.map(cell => `<span>${html(cell)}</span>`).join("") + '</div>';
-        const types = { ordenes: "Pedido" };
-        Object.entries(types).forEach(([section, type]) => {
-            const table = document.querySelector(`#${section}Section .history-table`);
-            const filtered = records.filter(r => r.tipo === type);
-            table.insertAdjacentHTML("beforeend", filtered.length ? filtered.map(record => {
-                const estadoActual = record.estado === "Pendiente" ? "En proceso" : record.estado;
-                if (type === "Pedido") return row([record.nombre, App.dateText(record.fecha), App.dateText(record.fechaEntrega), record.cantidad, App.money(record.total), estadoActual]);
-                return row([record.nombre, App.dateText(record.fechaEvento) + " " + record.hora, type === "Actividad" ? record.confirmacion : App.money(record.total), estadoActual]);
-            }).join("") : '<div class="empty-message" role="status"><img class="history-empty-icon" src="imagenes/carrito-vacio.svg" width="120" height="110" alt=""><strong class="history-empty-title">Aún no tienes pedidos</strong><p>Cuando realices una compra, tus pedidos aparecerán aquí.</p></div>');
+        const records = App.db().registros.filter(r => r.userId === current.id && r.tipo === "Pedido").reverse();
+        const filters = document.getElementById("historyFilters");
+        const search = document.getElementById("historySearch");
+        const status = document.getElementById("historyStatus");
+        const from = document.getElementById("historyFrom");
+        const to = document.getElementById("historyTo");
+        const previous = document.getElementById("historyPrevious");
+        const next = document.getElementById("historyNext");
+        const normalize = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        const state = record => record.estado === "Pendiente" ? "En proceso" : record.estado;
+        const pageSize = 5;
+        let pageNumber = 1;
+        function render() {
+            const matches = records.filter(record => normalize(record.nombre).includes(normalize(search.value.trim()))
+                && (!status.value || state(record) === status.value)
+                && (!from.value || record.fecha >= from.value)
+                && (!to.value || record.fecha <= to.value));
+            const pages = Math.max(1, Math.ceil(matches.length / pageSize));
+            pageNumber = Math.min(pageNumber, pages);
+            const start = (pageNumber - 1) * pageSize;
+            document.getElementById("historyRows").innerHTML = matches.slice(start, start + pageSize).map(record =>
+                '<div class="table-row">' + [record.nombre, App.dateText(record.fecha), App.dateText(record.fechaEntrega), record.cantidad, App.money(record.total), state(record)].map(cell => `<span>${html(cell)}</span>`).join("") + '</div>'
+            ).join("") || (records.length
+                ? '<div class="empty-message" role="status"><strong>No hay pedidos con esos filtros</strong><p>Prueba otra búsqueda o limpia los filtros.</p></div>'
+                : '<div class="empty-message" role="status"><img class="history-empty-icon" src="imagenes/carrito-vacio.svg" width="120" height="110" alt=""><strong class="history-empty-title">Aún no tienes pedidos</strong><p>Cuando realices una compra, tus pedidos aparecerán aquí.</p></div>');
+            text("#historyCount", matches.length ? `Mostrando ${start + 1}–${Math.min(start + pageSize, matches.length)} de ${matches.length} pedidos` : "0 pedidos");
+            text("#historyPage", `Página ${pageNumber} de ${pages}`);
+            previous.disabled = pageNumber === 1;
+            next.disabled = pageNumber === pages;
+        }
+        filters.addEventListener("submit", event => event.preventDefault());
+        filters.addEventListener("input", () => { pageNumber = 1; render(); });
+        filters.addEventListener("reset", event => {
+            event.preventDefault();
+            [search, status, from, to].forEach(field => { field.value = ""; });
+            pageNumber = 1; render();
         });
-        const select = document.getElementById("historySelect");
-        const show = () => Object.keys(types).forEach(section => document.getElementById(section + "Section").classList.toggle("hidden", select.value !== section));
-        select.addEventListener("change", show);
-        show();
+        previous.addEventListener("click", () => { if (pageNumber > 1) { pageNumber--; render(); } });
+        next.addEventListener("click", () => { pageNumber++; render(); });
+        render();
     }
+
     function initPayment() {
         if (page !== "pago.html") return;
         const form = document.getElementById("pagoForm");
